@@ -2,44 +2,44 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
-// The main public class that must match the file name.
+
 git public class ECommerceSystem {
 
     public static void main(String[] args) {
-        // --- Demonstration/Test Block ---
+     
 
-        // 1. Create a Supplier
+     
         Supplier vendor = new Supplier("S001", "TechDistro Inc.", "555-SUPP");
         vendor.sendProducts();
 
-        // 2. Create a Product
+    
         Product laptop = new Product("P101", "Laptop Pro", 1200.00, 50, "Electronics", vendor);
         laptop.displayInfo();
-        laptop.updateStock(-5); // Sell 5 units
+        laptop.updateStock(-5); 
 
-        // 3. Create a Customer
+       
         Customer alice = new Customer("C001", "Alice Smith", "alice@example.com", "123 Main St");
         alice.placeOrder();
 
-        // 4. Create Order Items
+       
         OrderItem item1 = new OrderItem(laptop, 2);
 
-        // 5. Create an Order
+       
         Order order1 = new Order("O2024-001", alice);
         order1.addItem(item1);
 
-        // 6. Process the Order
+       
         order1.calculateOrder();
         order1.updateStatus("Shipped");
 
-        // 7. Create an Employee
+      
         Employee bob = new Employee("E300", "Bob Johnson", "Warehouse Manager", 65000.00);
         bob.manageInventory();
         bob.processOrder(order1);
     }
 }
 
-// --- Supporting Classes (Package-Private) ---
+
 
 class Supplier {
     private String supplierID;
@@ -110,7 +110,7 @@ class Product {
         System.out.println("Product: " + name + ", Price: $" + price + ", Stock: " + stockQuantity);
     }
 
-    // ESSENTIAL GETTERS: Accessing private fields from other classes
+   
     public double getPrice() { return price; }
     public String getName() { return name; }
 }
@@ -124,18 +124,18 @@ class OrderItem {
     public OrderItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
-        // NOTE: calculateSubtotal must be called after product and quantity are set
+    
         this.subtotal = calculateSubtotal();
     }
 
     public double calculateSubtotal() {
-        // Accessing private price and name from Product via public getters
+   
         this.subtotal = this.product.getPrice() * this.quantity;
         System.out.println("Calculated subtotal for " + product.getName() + ": $" + subtotal);
         return this.subtotal;
     }
 
-    // ESSENTIAL GETTER: Accessing private subtotal from Order
+  
     public double getSubtotal() { return subtotal; }
 }
 
@@ -164,7 +164,7 @@ class Order {
     public double calculateOrder() {
         this.totalAmount = 0;
         for (OrderItem item : items) {
-            // Accessing private subtotal from OrderItem via public getter
+        
             this.totalAmount += item.getSubtotal();
         }
         System.out.println("Order " + orderID + " calculated. Total: $" + totalAmount);
@@ -176,7 +176,7 @@ class Order {
         System.out.println("Order " + orderID + " status updated to: " + newStatus);
     }
 
-    // ESSENTIAL GETTER: Accessing private orderID from Employee
+    
     public String getOrderID() { return orderID; }
 }
 
@@ -198,7 +198,7 @@ class Employee {
     }
 
     public void processOrder(Order order) {
-        // Accessing private orderID from Order via public getter
+  
         System.out.println(name + " is processing Order ID: " + order.getOrderID());
     }
 }
