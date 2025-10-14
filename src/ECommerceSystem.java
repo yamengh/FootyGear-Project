@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 // The main public class that must match the file name.
-public class ECommerceSystem {
+git public class ECommerceSystem {
 
     public static void main(String[] args) {
         // --- Demonstration/Test Block ---
