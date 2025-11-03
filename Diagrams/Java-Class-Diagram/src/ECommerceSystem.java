@@ -7,8 +7,8 @@ import java.util.ArrayList;
  * This class contains the {@code main} method to simulate interactions
  * between customers, products, suppliers, and employees.
  *
- * @Khaleel & Yamen
- * 
+ * @author YourName
+ * @version 1.0
  */
 public class ECommerceSystem {
 
@@ -16,7 +16,7 @@ public class ECommerceSystem {
      * The main entry point for the application.
      * Creates sample data and simulates a simple e-commerce workflow.
      *
-     * args Command line arguments (not used).
+     * @param args Command line arguments (not used).
      */
     public static void main(String[] args) {
       
@@ -62,9 +62,9 @@ class Supplier {
     /**
      * Constructs a new Supplier.
      *
-     * supplierID  The unique identifier for the supplier.
-     * name        The supplier's company name.
-     * contactInfo The supplier's contact phone or email.
+     * @param supplierID  The unique identifier for the supplier.
+     * @param name        The supplier's company name.
+     * @param contactInfo The supplier's contact phone or email.
      */
     public Supplier(String supplierID, String name, String contactInfo) {
         this.supplierID = supplierID;
@@ -99,10 +99,10 @@ class Customer {
     /**
      * Constructs a new Customer.
      *
-     * customerID The unique identifier for the customer.
-     * name       The customer's full name.
-     * email      The customer's email address.
-     * address    The customer's shipping address.
+     * @param customerID The unique identifier for the customer.
+     * @param name       The customer's full name.
+     * @param email      The customer's email address.
+     * @param address    The customer's shipping address.
      */
     public Customer(String customerID, String name, String email, String address) {
         this.customerID = customerID;
@@ -140,12 +140,12 @@ class Product {
     /**
      * Constructs a new Product.
      *
-     * productID     The unique identifier for the product.
-     * name          The display name of the product.
-     * price         The selling price of the product.
-     * stockQuantity The current quantity in stock.
-     * category      The category the product belongs to (e.g., "Electronics").
-     * supplier      The Supplier object that provides this product.
+     * @param productID     The unique identifier for the product.
+     * @param name          The display name of the product.
+     * @param price         The selling price of the product.
+     * @param stockQuantity The current quantity in stock.
+     * @param category      The category the product belongs to (e.g., "Electronics").
+     * @param supplier      The Supplier object that provides this product.
      */
     public Product(String productID, String name, double price, int stockQuantity, String category, Supplier supplier) {
         this.productID = productID;
@@ -159,7 +159,7 @@ class Product {
     /**
      * Updates the stock quantity by adding or removing items.
      *
-     * amount The number of items to add (positive) or remove (negative).
+     * @param amount The number of items to add (positive) or remove (negative).
      */
     public void updateStock(int amount) {
         this.stockQuantity += amount;
@@ -176,14 +176,14 @@ class Product {
     /**
      * Gets the price of the product.
      *
-     * The product's price as a double.
+     * @return The product's price as a double.
      */
     public double getPrice() { return price; }
 
     /**
      * Gets the name of the product.
      *
-     * The product's name as a String.
+     * @return The product's name as a String.
      */
     public String getName() { return name; }
 }
@@ -200,8 +200,8 @@ class OrderItem {
      * Constructs a new OrderItem.
      * The subtotal is automatically calculated upon creation.
      *
-     * product  The Product object for this item.
-     * quantity The number of units of the product.
+     * @param product  The Product object for this item.
+     * @param quantity The number of units of the product.
      */
     public OrderItem(Product product, int quantity) {
         this.product = product;
@@ -212,7 +212,7 @@ class OrderItem {
     /**
      * Calculates the subtotal for this line item (price * quantity).
      *
-     * The calculated subtotal as a double.
+     * @return The calculated subtotal as a double.
      */
     public double calculateSubtotal() {
         this.subtotal = this.product.getPrice() * this.quantity;
@@ -223,7 +223,7 @@ class OrderItem {
     /**
      * Gets the pre-calculated subtotal for this item.
      *
-     * The subtotal as a double.
+     * @return The subtotal as a double.
      */
     public double getSubtotal() { return subtotal; }
 }
@@ -243,8 +243,8 @@ class Order {
      * Constructs a new Order.
      * Initializes the order with a current date and "Pending" status.
      *
-     * orderID  The unique identifier for the order.
-     * customer The Customer who placed the order.
+     * @param orderID  The unique identifier for the order.
+     * @param customer The Customer who placed the order.
      */
     public Order(String orderID, Customer customer) {
         this.orderID = orderID;
@@ -258,7 +258,7 @@ class Order {
     /**
      * Adds a new OrderItem to this order.
      *
-     * item The OrderItem to add.
+     * @param item The OrderItem to add.
      */
     public void addItem(OrderItem item) {
         this.items.add(item);
@@ -268,7 +268,7 @@ class Order {
      * Calculates the total amount for the entire order by summing
      * the subtotals of all OrderItems.
      *
-     * The total amount for the order.
+     * @return The total amount for the order.
      */
     public double calculateOrder() {
         this.totalAmount = 0;
@@ -282,7 +282,7 @@ class Order {
     /**
      * Updates the status of the order.
      *
-     *  newStatus The new status.
+     * @param newStatus The new status (e.g., "Shipped", "Delivered").
      */
     public void updateStatus(String newStatus) {
         this.status = newStatus;
@@ -292,7 +292,7 @@ class Order {
     /**
      * Gets the order's unique identifier.
      *
-     * The order ID as a String.
+     * @return The order ID as a String.
      */
     public String getOrderID() { return orderID; }
 }
@@ -309,10 +309,10 @@ class Employee {
     /**
      * Constructs a new Employee.
      *
-     * employeeID The unique identifier for the employee.
-     * name       The employee's full name.
-     * position   The employee's job title.
-     * salary     The employee's salary.
+     * @param employeeID The unique identifier for the employee.
+     * @param name       The employee's full name.
+     * @param position   The employee's job title.
+     * @param salary     The employee's salary.
      */
     public Employee(String employeeID, String name, String position, double salary) {
         this.employeeID = employeeID;
@@ -331,7 +331,7 @@ class Employee {
     /**
      * Simulates the employee processing a specific customer order.
      *
-     * order The Order object to be processed.
+     * @param order The Order object to be processed.
      */
     public void processOrder(Order order) {
         System.out.println(name + " is processing Order ID: " + order.getOrderID());
