@@ -2,33 +2,127 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FootyGear Store</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f0f0f0; }
-        h1 { color: #2a9d8f; }
-        .product { background-color: #fff; padding: 10px; margin: 10px 0; border-radius: 5px; }
-        .product-name { font-weight: bold; }
-        .product-price { color: #e76f51; }
-        button { padding: 5px 10px; background-color: #264653; color: #fff; border: none; border-radius: 3px; cursor: pointer; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FootyGear - Your Football Equipment Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>FootyGear Store</h1>
-    <div class="product">
-        <span class="product-name">Football Shoes</span> - 
-        <span class="product-price">$50</span>
-        <button>Add to Cart</button>
+    <header>
+        <div class="top-bar">
+            <a href="#" class="logo">
+                <i class="fas fa-futbol"></i> FootyGear
+            </a>
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Search products...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Welcome to FootyGear</h1>
+        <p>Your one-stop shop for all football equipment and accessories</p>
+        <div class="hero-buttons">
+            <a href="#shop" class="btn">Shop Now</a>
+            <a href="#categories" class="btn btn-outline">View Categories</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="featured" class="section">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products" id="featuredProducts">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </section>
+
+        <section id="categories" class="section">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories" id="categoryList">
+                <!-- Categories will be loaded here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content container">
+            <div class="footer-column">
+                <h3>FootyGear</h3>
+                <p>Your ultimate destination for football equipment and accessories.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> khalilalabbadi74@gmail.com</li>
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Football Street, Sports City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FootyGear. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here by JavaScript -->
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
     </div>
-    <div class="product">
-        <span class="product-name">Team Jersey</span> - 
-        <span class="product-price">$35</span>
-        <button>Add to Cart</button>
-    </div>
-    <div class="product">
-        <span class="product-name">Goalkeeper Gloves</span> - 
-        <span class="product-price">$20</span>
-        <button>Add to Cart</button>
-    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">Item added to cart!</div>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
