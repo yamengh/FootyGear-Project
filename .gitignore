@@ -30,5 +30,7 @@ Thumbs.db
 coverage/
 
 # Server files
-server.js
-package-lock.json
+# server.js is now tracked in version control
+# package-lock.json is tracked to ensure consistent dependencies
+# Example files
+*.example.js
