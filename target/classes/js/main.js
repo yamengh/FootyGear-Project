@@ -1,10 +1,10 @@
-// Product data with reliable image URLs from a CDN
+// Product data with guaranteed working images
 const products = [
     {
         id: 1,
         name: 'Nike Mercurial Vapor',
         price: 149.99,
-        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        image: 'https://placehold.co/400x300/667eea/white?text=Nike+Boots',
         category: 'football boots',
         description: 'Lightweight football boots designed for speed and agility on the pitch.'
     },
@@ -12,7 +12,7 @@ const products = [
         id: 2,
         name: 'Adidas Predator Edge',
         price: 159.99,
-        image: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        image: 'https://placehold.co/400x300/764ba2/white?text=Adidas+Boots',
         category: 'football boots',
         description: 'Premium football boots with advanced ball control technology.'
     },
@@ -20,7 +20,7 @@ const products = [
         id: 3,
         name: 'Puma Future Z',
         price: 139.99,
-        image: 'https://images.unsplash.com/photo-1600185365483-26c7a535bbfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        image: 'https://placehold.co/400x300/f59e0b/white?text=Puma+Boots',
         category: 'football boots',
         description: 'Dynamic fit for agile players who need quick movements.'
     },
@@ -28,7 +28,7 @@ const products = [
         id: 4,
         name: 'Nike Flight Football',
         price: 89.99,
-        image: 'https://images.unsplash.com/photo-1579952363871-368c0f1b8a6f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        image: 'https://placehold.co/400x300/10b981/white?text=Football',
         category: 'footballs',
         description: 'Official match ball with high-performance design.'
     },
@@ -36,31 +36,31 @@ const products = [
         id: 5,
         name: 'Goalkeeper Gloves',
         price: 69.99,
-        image: 'https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        image: 'https://placehold.co/400x300/1f2937/white?text=GK+Gloves',
         category: 'accessories',
         description: 'Professional goalkeeper gloves with superior grip and protection.'
     },
     {
         id: 6,
-        name: 'Training Cones (Set of 10)',
+        name: 'Training Cones Set',
         price: 19.99,
-        image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        image: 'https://placehold.co/400x300/ef4444/white?text=Cones',
         category: 'training',
         description: 'Durable cones for training drills and exercises.'
     },
     {
         id: 7,
-        name: 'Football Kit',
+        name: 'Football Kit Jersey',
         price: 129.99,
-        image: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        image: 'https://placehold.co/400x300/3b82f6/white?text=Jersey',
         category: 'apparel',
-        description: 'Breathable and lightweight football jersey and shorts.'
+        description: 'Breathable and lightweight football jersey.'
     },
     {
         id: 8,
         name: 'Shin Guards',
         price: 29.99,
-        image: 'https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        image: 'https://placehold.co/400x300/8b5cf6/white?text=Shin+Guards',
         category: 'accessories',
         description: 'Professional shin guards with ankle protection.'
     }
@@ -68,36 +68,57 @@ const products = [
 
 // Cart functionality
 let cart = [];
+let currentFilter = 'all';
 const cartCount = document.querySelector('.cart-count');
 const productGrid = document.getElementById('product-grid');
-const cartModal = document.createElement('div');
-cartModal.className = 'modal';
-cartModal.id = 'cart-modal';
-cartModal.innerHTML = `
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Your Cart</h2>
-        <div id="cart-items"></div>
-        <div id="cart-total">Total: $0.00</div>
-        <button id="checkout-btn" class="btn">Proceed to Checkout</button>
-    </div>
-`;
-document.body.appendChild(cartModal);
+
+// Use existing modal from HTML instead of creating new one
+const cartModal = document.getElementById('cart-modal');
 
 // Fallback image URL
-const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1508098682722-e99c47a06b43?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80';
+const FALLBACK_IMAGE = 'https://placehold.co/400x300/cccccc/666666?text=Image+Not+Found';
 
 // Function to handle image loading errors
 function handleImageError(img) {
-    img.onerror = null; // Prevent infinite loop if fallback also fails
+    img.onerror = null;
     img.src = FALLBACK_IMAGE;
     img.alt = 'Product image not available';
 }
 
-// Display products with image error handling
+// Filter products function
+function filterProducts(category) {
+    currentFilter = category;
+
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent === 'All')) {
+            btn.classList.add('active');
+        }
+    });
+
+    displayProducts();
+}
+
+// Subscribe newsletter function
+function subscribeNewsletter(event) {
+    event.preventDefault();
+    const email = event.target.querySelector('input').value;
+    alert('Thank you for subscribing with: ' + email);
+    event.target.reset();
+}
+
+// Display products with filter support
 function displayProducts() {
+    if (!productGrid) return;
+
     productGrid.innerHTML = '';
-    products.forEach(product => {
+
+    const filteredProducts = currentFilter === 'all'
+        ? products
+        : products.filter(p => p.category === currentFilter);
+
+    filteredProducts.forEach(product => {
         const productElement = document.createElement('div');
         productElement.className = 'product-card';
         productElement.innerHTML = `
@@ -134,10 +155,10 @@ function displayProducts() {
 function addToCart(e) {
     const productId = parseInt(e.target.dataset.id);
     const product = products.find(p => p.id === productId);
-    
+
     if (product) {
         const existingItem = cart.find(item => item.id === productId);
-        
+
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
@@ -146,7 +167,7 @@ function addToCart(e) {
                 quantity: 1
             });
         }
-        
+
         updateCart();
         showSuccessMessage('Item added to cart!');
     }
@@ -156,15 +177,15 @@ function addToCart(e) {
 function updateCart() {
     const cartItems = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
-    
+
     if (cartItems) {
         cartItems.innerHTML = '';
         let total = 0;
-        
+
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             total += itemTotal;
-            
+
             const itemElement = document.createElement('div');
             itemElement.className = 'cart-item';
             itemElement.innerHTML = `
@@ -181,15 +202,18 @@ function updateCart() {
             `;
             cartItems.appendChild(itemElement);
         });
-        
+
         cartTotal.textContent = `Total: $${total.toFixed(2)}`;
         cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-        
+
+        // Save cart to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
         // Add event listeners to quantity buttons
         document.querySelectorAll('.quantity-btn').forEach(button => {
             button.addEventListener('click', updateQuantity);
         });
-        
+
         // Add event listeners to remove buttons
         document.querySelectorAll('.remove-btn').forEach(button => {
             button.addEventListener('click', removeFromCart);
@@ -202,7 +226,7 @@ function updateQuantity(e) {
     const productId = parseInt(e.target.dataset.id);
     const action = e.target.dataset.action;
     const item = cart.find(item => item.id === productId);
-    
+
     if (item) {
         if (action === 'increase') {
             item.quantity += 1;
@@ -217,6 +241,7 @@ function updateQuantity(e) {
 function removeFromCart(e) {
     const productId = parseInt(e.target.dataset.id);
     cart = cart.filter(item => item.id !== productId);
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     showSuccessMessage('Item removed from cart!');
 }
@@ -226,14 +251,14 @@ function showSuccessMessage(message) {
     const successMessage = document.createElement('div');
     successMessage.className = 'success-message';
     successMessage.textContent = message;
-    
+
     document.body.appendChild(successMessage);
-    
+
     // Show the message
     setTimeout(() => {
         successMessage.style.display = 'block';
     }, 100);
-    
+
     // Hide the message after 3 seconds
     setTimeout(() => {
         successMessage.style.opacity = '0';
@@ -246,7 +271,7 @@ function showSuccessMessage(message) {
 // Form submission
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
         // In a real app, you would send this data to a server
         this.reset();
@@ -293,4 +318,64 @@ if (checkoutBtn) {
 document.addEventListener('DOMContentLoaded', () => {
     displayProducts();
     updateCart();
+    checkAuthStatus();
 });
+
+// Authentication functionality
+const API_BASE = window.location.origin + '/api/auth';
+
+async function checkAuthStatus() {
+    try {
+        const response = await fetch(`${API_BASE}/check`, {
+            credentials: 'include'
+        });
+
+        const data = await response.json();
+
+        const userMenu = document.getElementById('user-menu');
+        const authButtons = document.getElementById('auth-buttons');
+        const userName = document.getElementById('user-name');
+
+        if (data.authenticated && data.user) {
+            // User is logged in
+            if (userMenu && authButtons && userName) {
+                userMenu.style.display = 'flex';
+                authButtons.style.display = 'none';
+                userName.textContent = data.user.name;
+            }
+        } else {
+            // User is not logged in
+            if (userMenu && authButtons) {
+                userMenu.style.display = 'none';
+                authButtons.style.display = 'flex';
+            }
+        }
+    } catch (error) {
+        console.error('Error checking auth status:', error);
+    }
+}
+
+// Logout functionality
+const logoutBtn = document.getElementById('logout-btn');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+        try {
+            const response = await fetch(`${API_BASE}/logout`, {
+                method: 'POST',
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                showSuccessMessage('Logged out successfully!');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+            alert('Error logging out. Please try again.');
+        }
+    });
+}

@@ -3,68 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FootyGear - Your Football Store</title>
+    <title>FootyGear - Premium Football Equipment</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>FootyGear</h1>
+            <h1><i class="fas fa-futbol"></i> FootyGear</h1>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#products">Products</a></li>
+                    <li><a href="#features">Features</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">0</span>
+            <div class="header-actions">
+                <div class="user-menu" id="user-menu" style="display: none;">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="user-name">User</span>
+                    <button class="logout-btn" id="logout-btn">Logout</button>
+                </div>
+                <div class="auth-buttons" id="auth-buttons">
+                    <a href="login.html" class="auth-btn login-btn">Login</a>
+                    <a href="signup.html" class="auth-btn signup-btn">Sign Up</a>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <h2>Welcome to FootyGear</h2>
-            <p>Your one-stop shop for all football equipment and merchandise</p>
-            <a href="#products" class="btn">Shop Now</a>
+            <h2>Elevate Your Game</h2>
+            <p>Premium football equipment for champions. Discover top-quality boots, balls, and gear from leading brands.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">Shop Now</a>
+                <a href="signup.html" class="btn btn-secondary">Join Us</a>
+            </div>
         </div>
     </section>
 
+    <!-- Category Section -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2>Shop By Category</h2>
+            <div class="category-grid">
+                <div class="category-card" onclick="filterProducts('football boots')">
+                    <i class="fas fa-shoe-prints"></i>
+                    <h3>Football Boots</h3>
+                    <p>Speed & Control</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('footballs')">
+                    <i class="fas fa-futbol"></i>
+                    <h3>Footballs</h3>
+                    <p>Match & Training</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('apparel')">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Apparel</h3>
+                    <p>Jerseys & Kits</p>
+                </div>
+                <div class="category-card" onclick="filterProducts('accessories')">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Accessories</h3>
+                    <p>Gloves & Guards</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
     <section id="products" class="products">
         <div class="container">
-            <h2>Our Products</h2>
+            <h2>Featured Products</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+                <button class="filter-btn" onclick="filterProducts('football boots')">Boots</button>
+                <button class="filter-btn" onclick="filterProducts('footballs')">Balls</button>
+                <button class="filter-btn" onclick="filterProducts('apparel')">Apparel</button>
+                <button class="filter-btn" onclick="filterProducts('accessories')">Accessories</button>
+            </div>
             <div class="product-grid" id="product-grid">
                 <!-- Products will be loaded here by JavaScript -->
             </div>
         </div>
     </section>
 
-    <section id="about" class="about">
+    <!-- Features Section -->
+    <section id="features" class="features">
         <div class="container">
-            <h2>About Us</h2>
-            <p>FootyGear is dedicated to providing high-quality football equipment to players of all levels. We believe in quality, performance, and style.</p>
+            <h2>Why Choose FootyGear?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Authentic Products</h3>
+                    <p>100% genuine equipment from authorized distributors</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Fast Delivery</h3>
+                    <p>Free shipping on orders over $50</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Expert help whenever you need it</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>Easy Returns</h3>
+                    <p>30-day hassle-free return policy</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <!-- About Section -->
+    <section id="about" class="about">
         <div class="container">
-            <h2>Contact Us</h2>
-            <form id="contact-form">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn">Send Message</button>
+            <h2>About FootyGear</h2>
+            <p>Since our founding, FootyGear has been dedicated to providing high-quality football equipment to players of all levels. From grassroots to professionals, we believe everyone deserves access to premium gear that enhances performance.</p>
+            <div class="stats">
+                <div class="stat">
+                    <h3>10K+</h3>
+                    <p>Happy Customers</p>
+                </div>
+                <div class="stat">
+                    <h3>500+</h3>
+                    <p>Products</p>
+                </div>
+                <div class="stat">
+                    <h3>50+</h3>
+                    <p>Brands</p>
+                </div>
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for exclusive deals and new arrivals</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn">Subscribe</button>
             </form>
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Sports Avenue, Game City</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>support@footygear.com</p>
+                        </div>
+                    </div>
+                </div>
+                <form id="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total" style="font-size: 1.5rem; font-weight: 700; margin: 20px 0; color: #667eea;"></div>
+            <a href="checkout.html" class="btn btn-primary" style="width: 100%; text-align: center; display: block;">
+                <i class="fas fa-lock"></i> Proceed to Checkout
+            </a>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
-            <p>&copy; 2023 FootyGear. All rights reserved.</p>
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3><i class="fas fa-futbol"></i> FootyGear</h3>
+                    <p>Your trusted partner for premium football equipment.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FootyGear. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
